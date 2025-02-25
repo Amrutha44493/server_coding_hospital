@@ -50,11 +50,11 @@ router.post('/edit/:index',(req,res)=>{
     dataset.splice(id-1,1,req.body);
   res.redirect('/');
 })
-router.delete('/delete/:index',(req,res)=>{
-    const id=req.params.index;
-    dataset.pop();
-    res.send(dataset);
-})
+router.get('/delete/:index',(req,res)=>{
+    const id = parseInt(req.params.index);
+   dataset.splice(id, 1); 
+    res.redirect('/');
 
+})
 
 module.exports=router;
