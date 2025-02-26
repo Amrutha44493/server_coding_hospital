@@ -32,12 +32,12 @@ router.get('/',(req,res)=>{
 router.get('/addform',(req,res)=>{
     res.render("addform");
 })
-//POST Operation
+//post
 router.post('/add',(req,res)=>{
    dataset.push(req.body);
      res.redirect('/');
 })
-
+//edit
 router.get('/editform/:id',(req,res)=>{
 
     res.render('editform',{
@@ -50,11 +50,15 @@ router.post('/edit/:index',(req,res)=>{
     dataset.splice(id-1,1,req.body);
   res.redirect('/');
 })
-router.get('/delete/:index',(req,res)=>{
-    const id = parseInt(req.params.index);
-   dataset.splice(id, 1); 
+//delete
+router.get('/delete/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = dataset.findIndex(item => item.id === id);
+    if (index !== -1) {
+        dataset.splice(index, 1);
+    }
     res.redirect('/');
+});
 
-})
 
 module.exports=router;
